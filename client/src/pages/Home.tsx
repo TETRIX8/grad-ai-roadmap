@@ -379,17 +379,19 @@ export default function Home() {
 
           <div className="roadmap-board">
             <div className="board-topline"><span className="board-label">ЭТАПЫ РАЗРАБОТКИ</span><span className="board-hint"><span className="hint-line" /> кликните по карточке</span></div>
+            <div className="board-signal"><span className="signal-title"><span className="signal-live" /> рабочий план</span><span className="signal-copy">от фундамента до публичного запуска</span><span className="signal-total">28 недель <span className="signal-total-bar"><i /></span></span></div>
+            <div className="month-head"><span className="week-title">ПЕРИОД</span><span>МЕСЯЦ 01 · ФУНДАМЕНТ</span><span>МЕСЯЦ 02 · ДАННЫЕ</span><span>МЕСЯЦ 03 · AI</span><span>МЕСЯЦ 04 · ПРОДУКТ</span><span>МЕСЯЦ 05 · BETA</span><span>МЕСЯЦ 06–07 · РЕЛИЗ</span></div>
             <div className="week-head"><span className="week-title">НЕДЕЛИ</span>{weeks.map((week) => <span key={week} className={`week-cell ${week % 4 === 0 ? "major" : ""}`}>{week}</span>)}</div>
             <div className="board-rows">
               {phases.map((phase) => {
                 const Icon = phase.icon;
                 return <div className={`timeline-row ${activeId === phase.id ? "row-active" : ""}`} key={phase.id}>
                   <button className="timeline-label" onClick={() => selectPhase(phase.id)}><span className="timeline-icon" style={{ color: phase.color }}><Icon size={15} /></span><span><strong>{phase.title}</strong><small>{phase.short}</small></span></button>
-                  <div className="timeline-grid">{weeks.map((week) => <span key={week} className="grid-cell" />)}<button className="timeline-bar" onClick={() => selectPhase(phase.id)} style={{ left: `calc(${(phase.start - 1) / 28 * 100}% + 3px)`, width: `calc(${phase.span / 28 * 100}% - 6px)`, background: `linear-gradient(90deg, ${phase.color}, color-mix(in srgb, ${phase.color} 45%, #172033))`, "--phase-color": phase.color } as React.CSSProperties}><span>{phase.number} · {phase.weeks}</span></button></div>
+                  <div className="timeline-grid">{weeks.map((week) => <span key={week} className="grid-cell" />)}<span className="today-line" title="Контрольная точка" /><button className="timeline-bar" onClick={() => selectPhase(phase.id)} style={{ left: `calc(${(phase.start - 1) / 28 * 100}% + 4px)`, width: `calc(${phase.span / 28 * 100}% - 8px)`, background: `linear-gradient(90deg, ${phase.color}, color-mix(in srgb, ${phase.color} 45%, #172033))`, "--phase-color": phase.color } as React.CSSProperties}><span>{phase.number} <b>·</b> {phase.weeks}</span><i /></button></div>
                 </div>;
               })}
             </div>
-            <div className="board-bottom"><span><span className="milestone-dot" /> MVP готов</span><span className="milestone-line" /><span>28 недель</span></div>
+            <div className="board-bottom"><span><span className="milestone-dot" /> MVP готов</span><span className="milestone-line" /><span className="milestone-label">28 недель</span><span className="milestone-pill"><Rocket size={12} /> launch point</span></div>
           </div>
 
           <div className="phase-cards-grid" id="modules">
